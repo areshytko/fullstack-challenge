@@ -1,0 +1,42 @@
+{
+  "name": "web-server.spam-report-app",
+  "version": "0.0.1",
+  "private": true,
+  "author": {
+    "name": "areshytko"
+  },
+  "scripts": {
+    "wait-for-db": "while [[ $(docker exec mongodb mongo --username $(cat ./secrets/MONGO_INITDB_ROOT_USERNAME) --password $(cat ./secrets/MONGO_INITDB_ROOT_PASSWORD) --quiet --eval 'rs.status().ok && rs.isMaster().ismaster') != 'true' ]]; do echo 'waiting...'; sleep 2; done",
+    "watch": "nodemon ./src/bin/www",
+    "up": "docker-compose -f ../docker-compose.dev.yml up -d",
+    "build": "docker-compose -f ../docker-compose.dev.yml build",
+    "down": "docker-compose -f ../docker-compose.dev.yml down",
+    "dev": "export WITHOUT_EVENT_POLLER=1 && npm run down && npm run up && npm run wait-for-db && unset WITHOUT_EVENT_POLLER && npm run fixtures && npm run watch",
+    "serve": "node ./src/bin/www",
+    "fixtures": "node ./src/fixtures/upload.js",
+    "test": "npm run down && npm run up && npm run wait-for-db && npm run fixtures && jest --runInBand"
+  },
+  "dependencies": {
+    "@types/amqplib": "^0.5.13",
+    "@types/wait-on": "^4.0.0",
+    "amqplib": "^0.6.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "express-jwt": "^6.0.0",
+    "http-errors": "~1.6.3",
+    "joi": "^17.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "log4js": "^6.3.0",
+    "mongoose": "^5.10.7",
+    "morgan": "~1.9.1",
+    "statuses": "^2.0.0",
+    "wait-on": "^5.2.0"
+  },
+  "devDependencies": {
+    "axios": "^0.20.0",
+    "jest": "^26.4.2",
+    "nodemon": "^2.0.4"
+  }
+}

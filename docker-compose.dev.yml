@@ -1,0 +1,76 @@
+version: "3.4"
+
+services:
+  app:
+    image: spam-reports-app:master
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        BUILDTYPE: "development"
+    environment:
+      - DATABASE_URL=mongodb://mongodb/reports?replicaSet=rs1
+      - PORT=8080
+      - "WITHOUT_EVENT_POLLER=${WITHOUT_EVENT_POLLER}"
+      - MB_HOST=rabbitmq:5672
+      - RABBITMQ_USER_FILE=/run/secrets/rabbitmq-user
+      - RABBITMQ_PASS_FILE=/run/secrets/rabbitmq-pass
+      - MONGO_USERNAME_FILE=/run/secrets/mongodb-user
+      - MONGO_PASSWORD_FILE=/run/secrets/mongodb-pass
+      - SINK_QUEUE=report-events
+      - JWT_SECRET=some-secret
+      - LOG_LEVEL=trace
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+      - rabbitmq
+    links:
+      - mongodb
+      - rabbitmq
+    secrets:
+      - rabbitmq-user
+      - rabbitmq-pass
+      - mongodb-user
+      - mongodb-pass
+
+  mongodb:
+    image: mongo:4.0.6
+    container_name: mongodb
+    hostname: mongodb
+    command: ["--replSet", "rs1", "--bind_ip_all"]
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=reports
+      - MONGO_REPLICA_SET_NAME=rs1
+      - MONGO_INITDB_ROOT_USERNAME_FILE=/run/secrets/mongodb-user
+      - MONGO_INITDB_ROOT_PASSWORD_FILE=/run/secrets/mongodb-pass
+    healthcheck:
+      test: test $$(echo "rs.initiate(); rs.status().ok && rs.isMaster().ismaster" | mongo --quiet -u $$(cat $${MONGO_INITDB_ROOT_USERNAME_FILE}) -p $$(cat $${MONGO_INITDB_ROOT_PASSWORD_FILE})) -eq true
+      interval: 10s
+      start_period: 10s
+    secrets:
+      - mongodb-user
+      - mongodb-pass
+
+  rabbitmq:
+    image: rabbitmq:3.8.9
+    ports:
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER_FILE=/run/secrets/rabbitmq-user
+      - RABBITMQ_DEFAULT_PASS_FILE=/run/secrets/rabbitmq-pass
+    secrets:
+      - rabbitmq-user
+      - rabbitmq-pass
+
+secrets:
+  rabbitmq-user:
+    file: ./backend/secrets/RABBITMQ_DEFAULT_USER
+  rabbitmq-pass:
+    file: ./backend/secrets/RABBITMQ_DEFAULT_PASS
+  mongodb-user:
+    file: ./backend/secrets/MONGO_INITDB_ROOT_USERNAME
+  mongodb-pass:
+    file: ./backend/secrets/MONGO_INITDB_ROOT_PASSWORD

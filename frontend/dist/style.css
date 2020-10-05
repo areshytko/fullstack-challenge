@@ -1,0 +1,50 @@
+.report {
+    border: solid;
+    border-width: 1px;
+    height: 70px;
+    width: 500px;
+    display: flex;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+
+.left-col {
+    float: left;
+    width: 30%
+}
+
+.right-col {
+    float: right;
+    width: 30%;
+}
+
+.middle-col {
+    display: inline-block;
+    width: 40%;
+}
+
+.resolve-button {
+    display: block;
+    width: 100%;
+    height: calc(50% - 2px);
+    margin: 2px;
+}
+
+.info-span {
+    margin-bottom: 5px;
+}
+
+.app-container {
+    width: 50%;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+.link {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+  }
