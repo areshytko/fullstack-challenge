@@ -19,7 +19,7 @@ This is a full-stack application for the internal operations team to resolve spa
 - Token-based authentication. Use JWT.
 - Role-based authorization. 
 - Assume there is an API Gateway service that proxies all API requests for the services and does SSL termination, request throttling, etc.
-- Zero Trust policy decision: the service authenticates all API requests via JWT validation. The secret for the validation is injected into the service environment. Use synchronous algorithm.
+- Zero Trust policy decision: the service authenticates all API requests via JWT validation. The secret for the validation is injected into the service environment. Use symmetric cryptographic algorithm.
 - Frontend application is implemented as a Single Page Application.
 - Development stand
 
