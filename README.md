@@ -8,7 +8,7 @@ This is a full-stack application for the internal operations team to resolve spa
 - The master system for the main domain entity - Report, - is some other service
 - To provide better latency store the data in a private microservice database
 - Use eventual consistency model to synchronize with the master system
-- Use MongoDB as the database of choice. Justification: good fit for the data model which contains no relations, low development and operational cost for sharding and replication if future scalability is required
+- Use MongoDB as the database of choice. Justification: good fit for the domain data model, low development and operational cost for sharding and replication if future scalability is required
 - Use ayncrhonous communication via the message broker to synchronize the data with other services
 - Use RabbitMQ as a message broker
 - Use Transactional Outbox and Polling publisher patterns to provide an atomic database write and message send. Alternatives:
