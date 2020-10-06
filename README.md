@@ -21,7 +21,7 @@ This is a full-stack application for the internal operations team to resolve spa
 - Assume there is an API Gateway service that proxies all API requests for the services and does SSL termination, request throttling, etc.
 - Zero Trust policy decision: the service authenticates all API requests via JWT validation. The secret for the validation is injected into the service environment. Use symmetric cryptographic algorithm.
 - Frontend application is implemented as a Single Page Application.
-- Development stand
+- Infrastructure-as-a-code: the technology stack for the production stand is unknown, so production deploy pipelines are not implemented. Development stand is implemented via docker-compose.
 
 ## Runbook
 
