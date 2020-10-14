@@ -43,7 +43,8 @@ npm run build
 
 ```bash
 npm run build
-npm run up 
+npm run up
+npm run fixtures
 ```
 
 Go to http://localhost:8080
