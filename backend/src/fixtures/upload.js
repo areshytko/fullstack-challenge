@@ -9,12 +9,17 @@
 
 const path = require('path');
 const fs = require('fs').promises;
+const log4js = require('log4js');
 
 const db = require('../db');
 const Report = require('../model/Report');
 const ReportEvent = require('../model/ReportEvent');
 const { uniqueBy } = require('../util');
 
+log4js.configure({
+    appenders: { console: { type: 'console' } },
+    categories: { default: { appenders: ['console'], level: 'debug' } }
+});
 
 const readReports = async (reportsFile) => {
     const data = await fs.readFile(reportsFile, 'utf8');

@@ -14,6 +14,7 @@ nvm install 11.11.0
 nvm use 11.11.0
 
 # install app
+echo  "127.0.0.1 mongodb" >> /etc/hosts
 git clone https://github.com/areshytko/fullstack-challenge.git
 cd fullstack-challenge/backend
 npm i --dev
