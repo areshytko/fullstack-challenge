@@ -8,7 +8,7 @@
   "scripts": {
     "wait-for-db": "while [[ $(docker exec mongodb mongo --username $(cat ./secrets/MONGO_INITDB_ROOT_USERNAME) --password $(cat ./secrets/MONGO_INITDB_ROOT_PASSWORD) --quiet --eval 'rs.status().ok && rs.isMaster().ismaster') != 'true' ]]; do echo 'waiting...'; sleep 2; done",
     "watch": "nodemon ./src/bin/www",
-    "up": "docker-compose -f ../docker-compose.dev.yml up -d",
+    "up": "docker-compose -f ../docker-compose.dev.yml up -d &> spam-report-app.log",
     "build": "docker-compose -f ../docker-compose.dev.yml build",
     "down": "docker-compose -f ../docker-compose.dev.yml down",
     "dev": "export WITHOUT_EVENT_POLLER=1 && npm run down && npm run up && npm run wait-for-db && unset WITHOUT_EVENT_POLLER && npm run fixtures && npm run watch",
