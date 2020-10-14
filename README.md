@@ -37,6 +37,13 @@ read [here](./vagrant/README.md).
 
 ### Init
 
+1. add MongoDB Replica Set hostname to your environment:
+
+```bash
+echo  "127.0.0.1 mongodb" >> /etc/hosts
+```
+
+2. install dependencies
 ```bash
 cd <project-root>/backend
 npm i --dev
