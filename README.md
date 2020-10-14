@@ -25,6 +25,10 @@ This is a full-stack application for the internal operations team to resolve spa
 
 ## Runbook
 
+### Run inside Vagrant VM:
+
+read [here](./vagrant/README.md).
+
 ### Requirements:
 - Docker, version >=9.03.8
 - docker-compose, version >=1.25.4
