@@ -19,4 +19,5 @@ cd fullstack-challenge/backend
 npm i --dev
 npm run build
 npm run up
+npm run wait-for-db
 npm run fixtures
