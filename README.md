@@ -25,17 +25,19 @@ This is a full-stack application for the internal operations team to resolve spa
 
 ## Runbook
 
-### Run inside Vagrant VM:
+### Run dev stand inside Vagrant VM:
 
 read [here](./vagrant/README.md).
 
-### Requirements:
+### Local setup:
+
+#### Requirements:
 - Docker, version >=9.03.8
 - docker-compose, version >=1.25.4
 - npm, version >=6.14.6
 - node.js, version >=v11.11.0
 
-### Init
+#### Init
 
 1. add MongoDB Replica Set hostname to your environment:
 
@@ -50,7 +52,7 @@ npm i --dev
 npm run build
 ```
 
-### Run the service on the development stand:
+#### Run the service on the development stand:
 
 ```bash
 npm run build
@@ -61,14 +63,14 @@ npm run fixtures
 
 Go to http://localhost:8080
 
-### Run tests:
+#### Run tests:
 
 ```bash
 npm run build
 npm run test
 ```
 
-### Run dev server:
+#### Run dev server:
 
 ```bash
 npm run dev
