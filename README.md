@@ -55,6 +55,7 @@ npm run build
 ```bash
 npm run build
 npm run up
+npm run wait-for-db
 npm run fixtures
 ```
 
