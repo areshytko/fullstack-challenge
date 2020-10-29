@@ -37,15 +37,9 @@ read [here](./vagrant/README.md).
 - npm, version >=6.14.6
 - node.js, version >=v11.11.0
 
-#### Init
+#### Setup
 
-1. add MongoDB Replica Set hostname to your environment:
-
-```bash
-echo  "127.0.0.1 mongodb" >> /etc/hosts
-```
-
-2. install dependencies
+1. install dependencies
 ```bash
 cd <project-root>/backend
 npm i --dev
@@ -54,14 +48,23 @@ npm run build
 
 #### Run the service on the development stand:
 
+1. run the service:
+
 ```bash
-npm run build
-npm run up
-npm run wait-for-db
-npm run fixtures
+npm run demo
 ```
 
-Go to http://localhost:8080
+2. Go to http://localhost:8080
+
+### Dev server environment:
+
+#### Setup 
+
+1. add MongoDB Replica Set hostname to your environment:
+
+```bash
+echo  "127.0.0.1 mongodb" >> /etc/hosts
+```
 
 #### Run tests:
 
