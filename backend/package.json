@@ -14,7 +14,8 @@
     "dev": "export WITHOUT_EVENT_POLLER=1 && npm run down && npm run up && npm run wait-for-db && unset WITHOUT_EVENT_POLLER && npm run fixtures && npm run watch",
     "serve": "node ./src/bin/www",
     "fixtures": "node ./src/fixtures/upload.js",
-    "test": "npm run down && npm run up && npm run wait-for-db && npm run fixtures && jest --runInBand"
+    "test": "npm run down && npm run up && npm run wait-for-db && npm run fixtures && jest --runInBand",
+    "demo": "npm run down && npm run up && npm run wait-for-db && docker exec spam-reports-app npm run fixtures"
   },
   "dependencies": {
     "@types/amqplib": "^0.5.13",
