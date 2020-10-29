@@ -34,8 +34,7 @@ read [here](./vagrant/README.md).
 #### Requirements:
 - Docker, version >=9.03.8
 - docker-compose, version >=1.25.4
-- npm, version >=6.14.6
-- node.js, version >=v11.11.0
+- node.js, version ==v11.11
 
 #### Setup
 
